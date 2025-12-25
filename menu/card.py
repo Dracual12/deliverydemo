@@ -14,6 +14,7 @@ from handlers import auxiliary_functions as af
 import menu.sort_the as sort_the
 from aiogram.utils.deep_linking import get_start_link
 from menu.categories import buttons_food_05, create_menu_buttons, create_buttons_to_menu
+from naim.start_bot import buttons_start_02
 
 # Кэш для списка файлов
 _photo_files_cache = None
@@ -481,35 +482,34 @@ def create_qr_keyboard(message_id):
 
 @dp.callback_query_handler(text_contains='bon_appetite')
 async def bon_appetite(call: types.CallbackQuery):
+    """Обработчик кнопки 'Готово' - возвращает на главное меню"""
     await call.answer()
     user = call.from_user.id
-    mesage_id = call.message.message_id
-    await bot.delete_message(chat_id=user, message_id=mesage_id)
-    menu = InlineKeyboardMarkup(row_width=1)
-
-    btn1 = InlineKeyboardButton(text="1 ⭐",
-                                callback_data=f"comment_review_star_1")
-
-    btn2 = InlineKeyboardButton(text="2 ⭐",
-                                callback_data=f"comment_review_star_2")
-
-    btn3 = InlineKeyboardButton(text="3 ⭐",
-                                callback_data=f"comment_review_star_3")
-
-    btn4 = InlineKeyboardButton(text="4 ⭐",
-                                callback_data=f"comment_review_star_4")
-
-    btn5 = InlineKeyboardButton(text="5 ⭐",
-                                callback_data=f"comment_review_star_5")
-
-    menu.row(btn1, btn2, btn3, btn4, btn5)
-
-    message_obj = await bot.send_message(
-        chat_id=user,
-        text=f"<b>Спасибо, что воспользовался сервисом <a href='https://t.me/food_2_mood'>food2mood</a>!❤️</b>\n\n"
-             "Как вам наша рекомендации?",
-        reply_markup=menu
-    )
+    
+    text = ("👋 Добро пожаловать в <b>KoreanChick</b>!\n"
+            "Я — виртуальный ассистент нашей сети ресторанов.\n"
+            "Здесь можно:\n\n"
+            "• 🛒 сделать заказ\n"
+            "• ❓ узнать ответы на частые вопросы\n"
+            "• 📍 посмотреть адреса и контакты ресторанов\n\n"
+            "С чем могу помочь?")
+    
+    try:
+        await bot.edit_message_text(
+            chat_id=user,
+            message_id=call.message.message_id,
+            text=text,
+            reply_markup=buttons_start_02(),
+            parse_mode='HTML'
+        )
+    except Exception as e:
+        # Если не удалось отредактировать сообщение, отправляем новое
+        await bot.send_message(
+            chat_id=user,
+            text=text,
+            reply_markup=buttons_start_02(),
+            parse_mode='HTML'
+        )
 
 
 
