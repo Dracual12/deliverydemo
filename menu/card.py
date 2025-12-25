@@ -14,7 +14,7 @@ from handlers import auxiliary_functions as af
 import menu.sort_the as sort_the
 from aiogram.utils.deep_linking import get_start_link
 from menu.categories import buttons_food_05, create_menu_buttons, create_buttons_to_menu
-from naim.start_bot import buttons_start_02
+from naim.keyboards import buttons_start_02
 
 # Кэш для списка файлов
 _photo_files_cache = None

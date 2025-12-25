@@ -18,6 +18,7 @@ import menu.card
 import order.order
 import handlers.admin_categories
 import os
+from naim.keyboards import buttons_start_02
 
 # Импортируем start_bot ПОСЛЕ всех остальных модулей, чтобы избежать циклических импортов
 # Обработчики стартового меню уже определены в start_bot.py и будут зарегистрированы последними
