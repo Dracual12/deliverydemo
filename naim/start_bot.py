@@ -4,6 +4,7 @@ from aiogram.utils.deep_linking import decode_payload
 from config import dp, bot, db
 from datetime import datetime
 from waiters import waiter_start as w_start
+from naim.main import buttons_start_02
 import time
 import sys
 import os
