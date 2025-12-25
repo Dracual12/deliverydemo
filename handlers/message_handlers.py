@@ -7,7 +7,7 @@ from config import dp, bot, db
 from aiogram import types
 import naim.normal as normal
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton, WebAppInfo
-from naim.main import buttons_start_02
+from naim.start_bot import buttons_start_02
 from handlers import bosses
 from menu import sort_the
 import handlers.auxiliary_functions as af
